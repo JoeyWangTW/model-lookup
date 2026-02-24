@@ -6,14 +6,34 @@ Coding agents have knowledge cutoffs. Model IDs change constantly — Gemini mod
 
 ## Install
 
-Clone the repo and symlink it into your Claude Code skills directory:
+### Per-repo (recommended for teams)
+
+Add it as a subtree or just copy the files into your project:
 
 ```bash
-git clone https://github.com/JoeyWangTW/model-lookup.git
-ln -s "$(pwd)/model-lookup" ~/.claude/skills/model-lookup
+# Copy into your repo
+mkdir -p .claude/skills
+git clone https://github.com/JoeyWangTW/model-lookup.git .claude/skills/model-lookup
+rm -rf .claude/skills/model-lookup/.git
+git add .claude/skills/model-lookup
 ```
 
-That's it. No API keys, no config, no dependencies beyond Python 3.
+Claude Code will auto-discover the skill when working in that repo.
+
+### Global (applies to all projects)
+
+```bash
+git clone https://github.com/JoeyWangTW/model-lookup.git ~/.claude/skills/model-lookup
+```
+
+Or if you keep the repo elsewhere, symlink it:
+
+```bash
+git clone https://github.com/JoeyWangTW/model-lookup.git ~/path/to/model-lookup
+ln -s ~/path/to/model-lookup ~/.claude/skills/model-lookup
+```
+
+No API keys, no config, no dependencies beyond Python 3.
 
 ## How It Works
 
@@ -23,7 +43,7 @@ The script queries OpenRouter's `/api/v1/models` endpoint (free, no auth require
 
 - **Native ID** — the correct model ID for the provider's own API
 - Context window, pricing, and capabilities
-- Results cached for 1 hour
+- Results cached for 1 hour in your system's temp directory
 
 ## Manual Usage
 
@@ -31,15 +51,15 @@ You can also run the lookup script directly:
 
 ```bash
 # Search by model family
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py gemini flash
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py claude sonnet
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py gpt-4o
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py deepseek chat
+python3 .claude/skills/model-lookup/scripts/lookup.py gemini flash
+python3 .claude/skills/model-lookup/scripts/lookup.py claude sonnet
+python3 .claude/skills/model-lookup/scripts/lookup.py gpt-4o
+python3 .claude/skills/model-lookup/scripts/lookup.py deepseek chat
 
 # List all models from a provider
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py --list google
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py --list anthropic
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py --list openai
+python3 .claude/skills/model-lookup/scripts/lookup.py --list google
+python3 .claude/skills/model-lookup/scripts/lookup.py --list anthropic
+python3 .claude/skills/model-lookup/scripts/lookup.py --list openai
 ```
 
 Example output:

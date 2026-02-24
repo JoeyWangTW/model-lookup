@@ -19,7 +19,7 @@ import sys
 import time
 import urllib.request
 
-CACHE_PATH = os.path.join(os.path.dirname(__file__), ".models-cache.json")
+CACHE_PATH = os.path.join(os.environ.get("TMPDIR", "/tmp"), "model-lookup-cache.json")
 CACHE_TTL = 3600  # 1 hour
 API_URL = "https://openrouter.ai/api/v1/models"
 

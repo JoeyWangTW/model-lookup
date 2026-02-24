@@ -14,20 +14,24 @@ When writing or editing code that references LLM model IDs, **always verify the 
 
 ## How to Use
 
-Run this to look up the latest model matching a query:
+The lookup script is at `scripts/lookup.py` inside this skill's directory. Find it and run:
 
 ```bash
+# If installed in the project repo:
+python3 .claude/skills/model-lookup/scripts/lookup.py <search terms>
+
+# If installed globally:
 python3 ~/.claude/skills/model-lookup/scripts/lookup.py <search terms>
 ```
 
 Examples:
 ```bash
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py gemini flash
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py claude sonnet
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py gpt-4o
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py deepseek chat
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py --list google
-python3 ~/.claude/skills/model-lookup/scripts/lookup.py --list anthropic
+python3 <path-to-skill>/scripts/lookup.py gemini flash
+python3 <path-to-skill>/scripts/lookup.py claude sonnet
+python3 <path-to-skill>/scripts/lookup.py gpt-4o
+python3 <path-to-skill>/scripts/lookup.py deepseek chat
+python3 <path-to-skill>/scripts/lookup.py --list google
+python3 <path-to-skill>/scripts/lookup.py --list anthropic
 ```
 
 The script queries OpenRouter's live model catalog (free, no API key needed) and returns matches with:
